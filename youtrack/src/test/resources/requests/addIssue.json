@@ -1,0 +1,7 @@
+{
+  "project": {
+    "id": "#{projectId}"
+  },
+  "summary": "#{issueSummary}",
+  "description": "#{issueDesc}"
+}

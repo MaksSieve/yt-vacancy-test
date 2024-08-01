@@ -1,0 +1,18 @@
+{
+  "details": [
+    {
+      "type": "EmailuserdetailsJSON",
+      "email": {
+        "type": "EmailJSON",
+        "verified": true,
+        "email": "#{username}@gmail.com"
+      },
+      "password": {
+        "type": "PlainpasswordJSON",
+        "value": "#{password}"
+      },
+      "passwordChangeRequired": true
+    }
+  ],
+  "name": "#{username}"
+}

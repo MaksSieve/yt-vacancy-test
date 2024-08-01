@@ -1,0 +1,16 @@
+{
+  "scope": [
+    {
+      "id": "5140fc89-dc5b-4b31-9a27-56e15495d689",
+      "key": "5140fc89-dc5b-4b31-9a27-56e15495d689",
+      "label": "YouTrack",
+      "data": {
+        "type": "service",
+        "id": "5140fc89-dc5b-4b31-9a27-56e15495d689",
+        "name": "YouTrack",
+        "applicationName": "YouTrack"
+      }
+    }
+  ],
+  "name": "test"
+}
