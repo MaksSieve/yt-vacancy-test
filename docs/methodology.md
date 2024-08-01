@@ -6,8 +6,9 @@
 
 ## Goals of testing
 
-- Measure the minimal time is needed to 100k issues to an empty Demo-project.
+- Measure the minimum time is needed to 100k issues to an empty Demo-project.
 - Proove that system can serve 100 concurrent users with database of 100k issues.
+- Measure the maximum number of concurrent users that the system can serve without it's perfromance degradation
 
 ## Non-functional requirements
 
@@ -36,17 +37,17 @@ The first includes:
 
 - Test to find maximum performance (MaxPerf) with a linear increasing load from 0 rps to point of degradation. It allows to define the maximal speed of the issue creation with which an application performance doesn't degrade.
 
-	When we know this speed we can aproximately calculate the minimum time of loading 100k issues.
+ Then we can aproximately calculate the minimum time of loading 100k issues.
 
 The second set includes:
 
-- Test to find MaxPerf with a stepped-spahed load. The first step is 20 users, the each next step is 10 users.
+- Test to find MaxPerf with a stepped-spahed load. The first step is 20 users, the each next step is 20 users.
 
-	Test contains 10 steps 10 minutes each with 5 minutes ramp-up (from 20 to 110 concurrent users, 10 x 15 minutes = 150 minutes for all test). Test will use an open load model to simulate real users who come to use the system.
+ Test contains 10 steps 10 minutes each with 5 minutes ramp-up (from 20 to 200 concurrent users, 10 x 15 minutes = 150 minutes for all test). Test will use a closed load model.
 
- 	This test will help to find the amount of users that system can serve before it's performance derades.
+  This test will help to find the amount of users that system can serve before it's performance derades.
 
-	The point of degradation is defined as number of users with which system do not satisfy at least one of NFRs. The maximum performance point is defined as the one step before the point of degradation.
+ The point of degradation is defined as number of users with which system do not satisfy at least one of NFRs. The maximum performance point is defined as the one step before the point of degradation.
 
 - Test to approve MaxPerf. This is the load test with static load level of 80% from found MaxPerf. A ramp-up duration - 10 minutes, a stable load duration - 60 minutes.
 
@@ -55,6 +56,15 @@ The second set includes:
 A load profile for the first set of test is pretty simple and includes only one operation of adding the issue: `POST /api/issues`.
 
 A load profile for the second set is more complex and should include more user operations.
+
+Each concurrent user wil share the same behaviour:
+
+1. make a portion of searches
+2. open some issues
+3. for each opened issue make one of mutations:
+   - comment
+   - add link
+   - changes fields
 
 ### Testing data
 
