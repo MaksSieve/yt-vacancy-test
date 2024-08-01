@@ -1,0 +1,28 @@
+{
+	"reportCalculatorThreads": 2,
+	"notificationAnalyzerThreads": 1,
+	"installationFolder": None,
+	"databaseLocation": None,
+	"logsLocation": None,
+	"allocatedMemory": None,
+	"startedTime": 1722217804209,
+	"databaseBackgroundThreads": 1,
+	"pendingAsyncJobs": 0,
+	"cachedResultsCountInDBQueriesCache": 3248,
+	"databaseQueriesCacheHitRate": "44.82%",
+	"blobStringsCacheHitRate": "79.45%",
+	"databaseSize": "3.1 MB",
+	"fullDatabaseSize": "5.1 MB",
+	"textIndexSize": "0.2 MB",
+	"totalTransactions": 2151,
+	"transactionsPerSecond": "0.07",
+	"requestsPerSecond": "0.00",
+	"availableMemory": None,
+	"usedMemory": None,
+	"onlineUsers": {
+		"$type": "OnlineUsers"
+	},
+	"uptime": "57 hours,24 minutes,11 seconds and 415 milliseconds", 
+	"availableProcessors": None, 
+	"$type": "Telemetry"
+}
