@@ -1,0 +1,14 @@
+
+# common idea and scala files
+.idea
+.vscode
+.metals
+.bsp
+.bloop
+
+# python 
+bin
+include
+lib
+
+
