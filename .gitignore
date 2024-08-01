@@ -11,4 +11,5 @@ bin
 include
 lib
 
-
+# data
+*.csv
