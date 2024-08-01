@@ -42,9 +42,9 @@ The second set includes:
 
 - Test to find MaxPerf with a stepped-spahed load. The first step is 20 users, the each next step is 10 users.
 
-	Test contains 10 steps 10 minutes each with 5 minutes ramp-up (from 20 to 110 concurrent users, 10 x 15 minutes = 150 minutes for all test). Test will use an open load model to simulate real users who comes to use the system. 
+	Test contains 10 steps 10 minutes each with 5 minutes ramp-up (from 20 to 110 concurrent users, 10 x 15 minutes = 150 minutes for all test). Test will use an open load model to simulate real users who come to use the system.
 
- 	This test will help to find the amount of users that system can serve before it's performance derades. 
+ 	This test will help to find the amount of users that system can serve before it's performance derades.
 
 	The point of degradation is defined as number of users with which system do not satisfy at least one of NFRs. The maximum performance point is defined as the one step before the point of degradation.
 
