@@ -25,4 +25,4 @@ Accordindly to the [Gatling report](/youtrack/runsresults/issuegenerationtest-20
 At this time the load was around 20-22 rps:
 ![pic.2](https://github.com/user-attachments/assets/26ab5e90-fef3-4977-bb47-8674c58df0ac)
 
-With this rate we can load 100k issues for aproximatly 1 hour and 25 minutes.
+**With this rate we can load 100k issues for aproximatly 1 hour and 25 minutes.**
