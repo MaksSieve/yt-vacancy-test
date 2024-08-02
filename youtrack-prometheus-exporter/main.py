@@ -50,7 +50,7 @@ if __name__ == '__main__':
 			print(telemetry)
 
 			uptime.set(int(datetime.now(UTC).timestamp()- int(telemetry['startedTime']/1000)))
-			databaseQueriesCacheHitRate.set(int(telemetry['databaseQueriesCacheHitRate'].split(" ")[0]))
+			databaseQueriesCacheHitRate.set(int(telemetry['databaseQueriesCacheHitRate'].split("%")[0]))
 			requestsPerSecond.set(int(telemetry['databaseQueriesCacheHitRate']))
 
 			time.sleep(args.scrape_interval)
