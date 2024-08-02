@@ -6,13 +6,15 @@ import org.galaxio.gatling.influxdb.Annotations
 import org.jetbrains.vacancy.perf.youtrack.scenarios.AddIssues
 
 class IssueGenerationTest extends Simulation with Annotations {
+
+  val projectUUID: String = getStringParam("projectUUID")
+
   setUp(
-    AddIssues(
-      getStringParam("apiAdminKey"),
-      getStringParam("projectUUID")
-    ).inject(
-      rampUsersPerSec(0).to(intensity).during(rampDuration)
-    )
-  ).protocols(httpProtocol)
+    AddIssues(projectUUID)
+      .inject(
+        rampUsersPerSec(0).to(intensity).during(rampDuration)
+      )
+  )
+    .protocols(httpProtocol)
     .maxDuration(testDuration)
 }

@@ -1,32 +1,29 @@
 package org.jetbrains.vacancy.perf.youtrack.scenarios
 
 import io.gatling.core.Predef._
+import io.gatling.core.feeder.BatchableFeederBuilder
 import io.gatling.core.structure.ScenarioBuilder
+import org.jetbrains.vacancy.perf.youtrack.Utility.LoremIpsum
 import org.jetbrains.vacancy.perf.youtrack.cases._
 
-import scala.util.Random
-
 object AddIssues {
-  def apply(authToken: String, projectId: String): ScenarioBuilder =
-    new AddIssues(authToken, projectId).scn
+  def apply(projectId: String): ScenarioBuilder =
+    new AddIssues(projectId).scn
 }
 
-class AddIssues(authToken: String, projectId: String) {
+class AddIssues(projectId: String) {
 
-  val userFeeder = csv("feeders/users.csv").random
+  val userFeeder: BatchableFeederBuilder[String] = csv("feeders/users.csv").random
 
   val issueSummaryFeeder: Iterator[Map[String, String]] = Iterator.continually {
-    // make a random number of random words
-    val words = List.fill(Random.between(3,7))(Random.alphanumeric.take(Random.between(1, 15)).mkString)
-    Map("issueSummary" -> words.mkString(" "))
+    Map("issueSummary" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(3, 5)))
   }
 
   val issueDescFeeder: Iterator[Map[String, String]] = Iterator.continually {
-    val words = List.fill(Random.between(20,31))(Random.alphanumeric.take(Random.between(1, 16)).mkString)
-    Map("issueDesc" -> words.mkString(" "))
+    Map("issueDesc" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(3, 5)))
   }
 
-  val projectIdFeeder = Iterator.continually {
+  val projectIdFeeder: Iterator[Map[String, String]] = Iterator.continually {
     Map("projectId" -> projectId)
   }
 
