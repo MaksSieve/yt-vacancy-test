@@ -7,20 +7,20 @@ import org.jetbrains.vacancy.perf.youtrack.Utility.LoremIpsum
 import org.jetbrains.vacancy.perf.youtrack.cases._
 
 object AddIssues {
-  def apply(projectId: String): ScenarioBuilder =
-    new AddIssues(projectId).scn
+  def apply(projectId: String, userFeeder: BatchableFeederBuilder[String]): ScenarioBuilder =
+    new AddIssues(projectId, userFeeder).scn
 }
 
-class AddIssues(projectId: String) {
+class AddIssues(projectId: String, userFeeder: BatchableFeederBuilder[String]) {
 
-  val userFeeder: BatchableFeederBuilder[String] = csv("feeders/users.csv").random
+
 
   val issueSummaryFeeder: Iterator[Map[String, String]] = Iterator.continually {
-    Map("issueSummary" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(3, 5)))
+    Map("issueSummary" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(5, 10)))
   }
 
   val issueDescFeeder: Iterator[Map[String, String]] = Iterator.continually {
-    Map("issueDesc" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(3, 5)))
+    Map("issueDesc" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(20, 30)))
   }
 
   val projectIdFeeder: Iterator[Map[String, String]] = Iterator.continually {
