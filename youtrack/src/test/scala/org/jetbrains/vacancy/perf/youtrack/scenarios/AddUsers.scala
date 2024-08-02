@@ -43,9 +43,6 @@ class AddUsers(authToken: String, projectUUID:String, numberOfUsers: Int) {
           session
         })
         .exec(Users.addUserToTeam(projectUUID, authToken))
-
-
-
     }
     .exec( session => {
       csvUserWriter.close()
