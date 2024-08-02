@@ -16,8 +16,8 @@ class Debug extends Simulation {
   val userFeeder: BatchableFeederBuilder[String] = csv("feeders/users.csv").random
 
   setUp(
-//     AddUsers(apiAdminKey, projectUUID)
-//     .inject(atOnceUsers(1))
+     AddIssues(projectId, userFeeder)
+     .inject(atOnceUsers(1))
 //    UserActivity(userFeeder)
 //      .inject(atOnceUsers(1))
   ).protocols(
