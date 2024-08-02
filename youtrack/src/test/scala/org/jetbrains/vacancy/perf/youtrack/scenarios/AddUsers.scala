@@ -9,13 +9,13 @@ import java.io.{BufferedWriter, FileWriter}
 import scala.util.Random
 
 object AddUsers {
-  def apply(authToken: String, projectUUID: String): ScenarioBuilder =
-    new AddUsers(authToken, projectUUID).scn
+  def apply(authToken: String, projectUUID: String, numberOfUsers: Int): ScenarioBuilder =
+    new AddUsers(authToken, projectUUID, numberOfUsers).scn
 }
 
-class AddUsers(authToken: String, projectUUID:String) {
+class AddUsers(authToken: String, projectUUID:String, numberOfUsers: Int) {
 
-  val csvUserWriter = new CSVWriter(new BufferedWriter(new FileWriter("feeders/users.csv")))
+  val csvUserWriter = new CSVWriter(new BufferedWriter(new FileWriter("users.csv")))
 
   val userNameFeeder: Iterator[Map[String, String]] = Iterator.continually {
     Map("username" -> s"test-user-${Random.alphanumeric.take(10).mkString}")
@@ -26,12 +26,13 @@ class AddUsers(authToken: String, projectUUID:String) {
   }
 
   val scn: ScenarioBuilder = scenario("AddUsers Scenario")
-    .repeat(5) {
+    .repeat(numberOfUsers) {
       feed(userNameFeeder)
       .feed(passwordFeeder)
         .exec(Users.createNewUser(authToken))
         .exec(Users.generatePermToken(authToken))
         .exec(session => {
+          println(session("userUUID").as[String])
           csvUserWriter.writeNext(Array(
             session("username").as[String],
             session("password").as[String],
@@ -42,6 +43,8 @@ class AddUsers(authToken: String, projectUUID:String) {
           session
         })
         .exec(Users.addUserToTeam(projectUUID, authToken))
+
+
 
     }
     .exec( session => {

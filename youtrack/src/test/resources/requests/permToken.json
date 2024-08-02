@@ -1,12 +1,12 @@
 {
   "scope": [
     {
-      "id": "5140fc89-dc5b-4b31-9a27-56e15495d689",
-      "key": "5140fc89-dc5b-4b31-9a27-56e15495d689",
-      "label": "YouTrack",
+      "id":"22c954de-7786-4f8b-90b3-22f05b7e4d49",
+      "key":"22c954de-7786-4f8b-90b3-22f05b7e4d49",
+      "label":"YouTrack",
       "data": {
         "type": "service",
-        "id": "5140fc89-dc5b-4b31-9a27-56e15495d689",
+        "id": "22c954de-7786-4f8b-90b3-22f05b7e4d49",
         "name": "YouTrack",
         "applicationName": "YouTrack"
       }

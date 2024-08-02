@@ -11,7 +11,7 @@ object Users {
     .check(status is 200)
 
 
-  val createNewUser: String => HttpRequestBuilder = (authToken: String) => http("POST /hub/api/rest/users")
+  val createNewUser: String => HttpRequestBuilder = (authToken: String) => http("createNewUser")
     .post("/hub/api/rest/users")
     .queryParamMap(Map("failOnPermissionReduce" -> true, "fields" -> ""))
     .headers(Map(("Authorization", "Bearer " + authToken)))
@@ -19,7 +19,8 @@ object Users {
     .check(status is 200)
     .check(header("Location").transform(s => s.split("""\/""").last).saveAs("userUUID"))
 
-  val addUserToTeam: (String, String) => HttpRequestBuilder = (projectUUID: String, authToken: String) => http("POST /hub/api/rest/projects/$id/team/users")
+  val addUserToTeam: (String, String) => HttpRequestBuilder = (projectUUID: String, authToken: String) =>
+    http("addUserToTeam")
     .post(s"/hub/api/rest/projects/${projectUUID}/team/users")
     .queryParamMap(Map(
       "fields" -> "total,guest,id,name,login,userType(id),profile(avatar(url),email(email,verified))"
@@ -29,7 +30,7 @@ object Users {
     .check(status is 200)
 
   val generatePermToken: String => HttpRequestBuilder = (authToken: String) => http("generatePermToken")
-    .post("/hub/api/rest/users/${userUUID}/permanenttokens")
+    .post("/hub/api/rest/users/#{userUUID}/permanenttokens")
     .queryParamMap(Map(
       ("failOnPermissionReduce", true),
       ("fields", "token")
