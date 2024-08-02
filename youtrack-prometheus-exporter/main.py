@@ -38,6 +38,8 @@ if __name__ == '__main__':
 		print(f"Scrape intervel set to { args.scrape_interval }s")
 
 		uptime = Gauge("uptime", "Uptime of instance")
+		databaseQueriesCacheHitRate = Gauge("databaseQueriesCacheHitRate", "databaseQueriesCacheHitRate")
+		requestsPerSecond = Gauge("requestsPerSecond", "requestsPerSecond")
 
 		telemetry = get_telemetry(args.api, args.api_key)
 		print(telemetry)
@@ -45,7 +47,11 @@ if __name__ == '__main__':
 		while True:
 			telemetry = get_telemetry(args.api, args.api_key)
 
+			print(telemetry)
+
 			uptime.set(int(datetime.now(UTC).timestamp()- int(telemetry['startedTime']/1000)))
+			databaseQueriesCacheHitRate.set(int(telemetry['databaseQueriesCacheHitRate'].split(" ")[0]))
+			requestsPerSecond.set(int(telemetry['databaseQueriesCacheHitRate']))
 
 			time.sleep(args.scrape_interval)
 			
