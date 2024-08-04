@@ -12,9 +12,6 @@ object AddIssues {
 }
 
 class AddIssues(projectId: String, userFeeder: BatchableFeederBuilder[String]) {
-
-
-
   val issueSummaryFeeder: Iterator[Map[String, String]] = Iterator.continually {
     Map("issueSummary" -> LoremIpsum.getRandomNumberOfWords(Range.inclusive(5, 10)))
   }
