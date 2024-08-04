@@ -16,7 +16,8 @@ class IssueGenerationTestStab extends Simulation with Annotations {
   setUp(
     AddIssues(projectId, userFeeder)
       .inject(
-        constantUsersPerSec(15).during(6700 seconds)
+        rampUsersPerSec(0).to(7).during(5 minutes),
+        constantUsersPerSec(7).during(1800 seconds)
       )
   )
     .protocols(httpProtocol)
