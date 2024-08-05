@@ -4,7 +4,6 @@
 
 - Short results
 - Issues loading task
-- 
 
 ## Short results
 
@@ -51,6 +50,7 @@ Potential solutions:
 - add more CPU resources
 - change tools to closed load model
 - use less load
+- fine tuning (Application, GC, DB)
 
 ## Load testing
 
