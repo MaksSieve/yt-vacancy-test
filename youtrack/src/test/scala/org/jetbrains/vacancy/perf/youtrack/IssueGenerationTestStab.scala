@@ -6,8 +6,6 @@ import org.galaxio.gatling.config.SimulationConfig._
 import org.galaxio.gatling.influxdb.Annotations
 import org.jetbrains.vacancy.perf.youtrack.scenarios.AddIssues
 
-import scala.concurrent.duration.DurationInt
-
 class IssueGenerationTestStab extends Simulation with Annotations {
 
   val projectId: String = getStringParam("projectId")
@@ -16,10 +14,10 @@ class IssueGenerationTestStab extends Simulation with Annotations {
   setUp(
     AddIssues(projectId, userFeeder)
       .inject(
-        rampUsersPerSec(0).to(7).during(5 minutes),
-        constantUsersPerSec(7).during(1800 seconds)
+        rampUsersPerSec(0).to(intensity).during(rampDuration),
+        constantUsersPerSec(intensity).during(stageDuration)
       )
   )
     .protocols(httpProtocol)
-    .maxDuration(6700 seconds)
+    .maxDuration(testDuration)
 }
