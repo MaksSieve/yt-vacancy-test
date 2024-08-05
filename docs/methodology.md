@@ -35,7 +35,7 @@ To achieve the goals of testing two sets of tests should be executed.
 
 The first includes:
 
-- Test to find maximum performance (MaxPerf) with a linear increasing load from 0 rps to point of degradation. It allows to define the maximal speed of the issue creation with which an application performance doesn't degrade.
+- Test to find maximum performance (MaxPerf) with a stepped increasing load from 0 rps to point of degradation. It allows to define the maximal speed of the issue creation with which an application performance doesn't degrade.
 
  Then we can aproximately calculate the minimum time of loading 100k issues.
 
