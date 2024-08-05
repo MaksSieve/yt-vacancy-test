@@ -1,5 +1,15 @@
 # Results
 
+## ToC
+
+- Short results
+- Issues loading task
+- 
+
+## Short results
+
+- 100k issues could be loaded with aproximate 4 hours.
+
 ## Issues loading
 
 ### First iteration
@@ -29,6 +39,7 @@ This allows us to calculate new minimum load time:
 100000 / 7 / 60 / 60 ~= 3.96 hours 
 ```
 
+The next [load test](/youtrack/runsresults/issuegenerationteststab-20240805110054151/) showed the ability of system to endure that load with long time.
+
 However an attmpt to use this level of load still causes an application crash after some time:
 ![image](https://github.com/user-attachments/assets/f0b34f56-857a-4302-bf3b-04999eec295d)
-
