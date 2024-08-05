@@ -23,10 +23,12 @@ Next step was to change methodology to use stepped MaxPerf to find actual point 
 
 Stepped test approved the thesis that an actual degradation point is lower and lies aroung ~ 6-7 rps: [Gatling Report](/youtrack/runsresults/issuegenerationtestmaxperf-20240802171440667/)
 
-
-
 This allows us to calculate new minimum load time:
 
 ```text
 100000 / 7 / 60 / 60 ~= 3.96 hours 
 ```
+
+However an attmpt to use this level of load still causes an application crash after some time:
+![image](https://github.com/user-attachments/assets/f0b34f56-857a-4302-bf3b-04999eec295d)
+
