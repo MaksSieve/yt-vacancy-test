@@ -66,6 +66,11 @@ System is still crashing after reaching 20 rps but now do not utilize even 80% o
 But the way how the CPU utilization increases (kind of exponential) indicates that problem with reindexing is present.
 One of the solutions could be turn off the indexing for the time of issue loading.
 
+### Fourth iteration
+
+We could also use standart YouTrack instruments to import issues.
+I wrote a simple csv [generator](/youtrack-issue-csv-generator/), and the load this csv to YouTrack via google sheet
+
 ## Load testing
 
 1. Load
