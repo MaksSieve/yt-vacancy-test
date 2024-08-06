@@ -37,17 +37,17 @@ The first includes:
 
 - Test to find maximum performance (MaxPerf) with a stepped increasing load from 0 rps to point of degradation. It allows to define the maximal speed of the issue creation with which an application performance doesn't degrade.
 
- Then we can aproximately calculate the minimum time of loading 100k issues.
+   Then we can aproximately calculate the minimum time of loading 100k issues.
 
 The second set includes:
 
 - Test to find MaxPerf with a stepped-spahed load. The first step is 20 users, the each next step is 20 users.
 
- Test contains 10 steps 10 minutes each with 5 minutes ramp-up (from 20 to 200 concurrent users, 10 x 15 minutes = 150 minutes for all test). Test will use a closed load model.
+   Test contains 10 steps 10 minutes each with 5 minutes ramp-up (from 20 to 200 concurrent users, 10 x 15 minutes = 150 minutes for all test). Test will use a closed load model.
 
-  This test will help to find the amount of users that system can serve before it's performance derades.
+   This test will help to find the amount of users that system can serve before it's performance derades.
 
- The point of degradation is defined as number of users with which system do not satisfy at least one of NFRs. The maximum performance point is defined as the one step before the point of degradation.
+   The point of degradation is defined as number of users with which system do not satisfy at least one of NFRs. The maximum performance point is defined as the one step before the point of degradation.
 
 - Test to approve MaxPerf. This is the load test with static load level of 80% from found MaxPerf. A ramp-up duration - 10 minutes, a stable load duration - 60 minutes.
 
