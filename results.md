@@ -58,6 +58,9 @@ Firtsly I've decided to test the system with more reources to check that adding 
 Test showed that adding more CPU cores add some capacity to the system but this is not the key factor:
 ![image](https://github.com/user-attachments/assets/1964d290-aad2-4e01-b523-8f9dbbeced1e)
 
+![image](https://github.com/user-attachments/assets/9709486c-185f-4e83-9e15-bd4df7e8c233)
+
+
 
 ## Load testing
 
