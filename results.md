@@ -21,7 +21,9 @@
 - At this time the load was around 20-22 rps:
 ![pic.2](https://github.com/user-attachments/assets/26ab5e90-fef3-4977-bb47-8674c58df0ac)
 
-- [Node exporter dashboard for test time](http://ec2-35-181-160-56.eu-west-3.compute.amazonaws.com:3000/d/rYdddlPWk/node-exporter-full?orgId=1&from=1722607906000&to=1722608220000)
+- Resources utilizaion
+![pic.3](https://github.com/user-attachments/assets/f5911ba2-b773-4261-9322-fb1cc511b1df)
+
 
 - With this rate we can load 100k issues for aproximatly 1 hour and 25 minutes.
 
@@ -42,7 +44,7 @@ This allows us to calculate new minimum load time:
 The next [load test](/youtrack/runsresults/issuegenerationteststab-20240805110054151/) showed the ability of system to endure that load with long time.
 
 However [an attmpt](/youtrack/runsresults/issuegenerationteststab-20240805141220619/) to use this level of load still causes an application crash after some time:
-![image](https://github.com/user-attachments/assets/f0b34f56-857a-4302-bf3b-04999eec295d)
+![pic.4](https://github.com/user-attachments/assets/f0b34f56-857a-4302-bf3b-04999eec295d)
 
 **Hypothesis**: more and more issues creation causes more CPU pressure while reindexing, GC adds spikes. At some time the lack of CPU resources causes too long response time. An open load model on the other side still spawns more and more requests and finally system fails to serve them.
 
@@ -57,8 +59,8 @@ Potential solutions:
 
 Firtsly I've decided to test the system with more reources to check that adding more CPU (t2.2xlarge AWS-instance: 8 CPU, 32 RAM) could help the system to endure the load.
 [Test](/youtrack/runsresults/issuegenerationtestmaxperf-20240806083340560/) showed that adding more CPU cores add some capacity to the system but this is not the key factor:
-![image](https://github.com/user-attachments/assets/1964d290-aad2-4e01-b523-8f9dbbeced1e)
-![image](https://github.com/user-attachments/assets/9709486c-185f-4e83-9e15-bd4df7e8c233)
+![pic.5](https://github.com/user-attachments/assets/1964d290-aad2-4e01-b523-8f9dbbeced1e)
+![pic.6](https://github.com/user-attachments/assets/9709486c-185f-4e83-9e15-bd4df7e8c233)
 
 System is still crashing after reaching 20 rps but now do not utilize even 80% of CPU. That shows us that something else causes crashes.
 
