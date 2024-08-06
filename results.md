@@ -2,8 +2,9 @@
 
 ## ToC
 
-- Short results
-- Issues loading task
+- [Short results](#short-results)
+- [Issues loading task](#issues-loading)
+- [Load Testing](#load-testing)
 
 ## Short results
 
@@ -54,17 +55,14 @@ Potential solutions:
   
 ### Third iteration
 
-Firtsly I've decided to test the system with more reources to check that adding more CPU could help the system to endure the load.
-Test showed that adding more CPU cores add some capacity to the system but this is not the key factor:
+Firtsly I've decided to test the system with more reources to check that adding more CPU (t2.2xlarge AWS-instance: 8 CPU, 32 RAM) could help the system to endure the load.
+[Test](/youtrack/runsresults/issuegenerationtestmaxperf-20240806083340560/) showed that adding more CPU cores add some capacity to the system but this is not the key factor:
 ![image](https://github.com/user-attachments/assets/1964d290-aad2-4e01-b523-8f9dbbeced1e)
-
 ![image](https://github.com/user-attachments/assets/9709486c-185f-4e83-9e15-bd4df7e8c233)
 
-
+System is still crashing after reaching 20 rps but now do not utilize even 80% of CPU. That shows us that something else causes crashes.
 
 ## Load testing
-
-Answers:
 
 1. Load
 
