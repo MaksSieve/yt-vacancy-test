@@ -41,9 +41,12 @@ object Utility {
     val loremBlock = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     val loremWords: Array[String] = loremBlock.split(" ")
 
-    def getWords(words: Int): String = {
-      val wordCount = words % loremWords.length
-      loremWords.slice(0, wordCount).mkString(" ")
+    def getWords(n: Int): String = {
+      val random = new Random()
+      (0 to n)
+        .map(_ => { loremWords(random.nextInt(loremWords.length)) })
+        .mkString(" ")
+
     }
 
     def getRandomNumberOfWords(range: Range): String = {
