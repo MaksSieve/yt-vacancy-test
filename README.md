@@ -1,4 +1,4 @@
-# Test task for JB YouTrack vacancy 
+# Test task for JB YouTrack vacancy
 
 QA Performance Engineer
 
