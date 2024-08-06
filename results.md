@@ -52,8 +52,6 @@ Potential solutions:
 - use less load
 - fine tuning (Application, GC, DB)
 
-
-
 ## Load testing
 
 Answers:
