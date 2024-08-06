@@ -80,7 +80,7 @@ The final profile for 100 users looks like this:
 | --- | --- | --- | --- |
 | searchAssist | POST /search/assist | 1000 | 0.28 |
 | sortedIssues | POST /sortedIssues | 1000 | 0.28 |
-| issuesGetter | POST /issuesGettert | 1000 | 0.28 |
+| issuesGetter | POST /issuesGetter | 1000 | 0.28 |
 | recentIssues | GET /users/me/recent/issues | 3000 | 0.84 |
 | me | GET /users/me | 3000 | 0.84 |
 | openIssue | GET /issues/${id} | 3000 | 0.84 |
