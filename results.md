@@ -64,6 +64,11 @@ Firtsly I've decided to test the system with more reources to check that adding 
 
 System is still crashing after reaching 20 rps but now do not utilize even 80% of CPU. That shows us that something else causes crashes.
 
+### Fourth iteration
+
+We could also use standart YouTrack instruments to import issues.
+I wrote a simple csv [generator](/youtrack-issue-csv-generator/), and the load this csv to YouTrack via google sheet
+
 ## Load testing
 
 1. Load
