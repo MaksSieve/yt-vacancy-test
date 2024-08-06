@@ -43,7 +43,7 @@ The next [load test](/youtrack/runsresults/issuegenerationteststab-2024080511005
 However [an attmpt](/youtrack/runsresults/issuegenerationteststab-20240805141220619/) to use this level of load still causes an application crash after some time:
 ![image](https://github.com/user-attachments/assets/f0b34f56-857a-4302-bf3b-04999eec295d)
 
-**Hypothesis**: more and more issues creation causes more CPU pressure on reindexing, GC adds more. At some time the lack of CPU resources causes too long response time. An open load model on the other side still spawns more and more requests and finally system fails to serve them.
+**Hypothesis**: more and more issues creation causes more CPU pressure while reindexing, GC adds spikes. At some time the lack of CPU resources causes too long response time. An open load model on the other side still spawns more and more requests and finally system fails to serve them.
 
 Potential solutions:
 
@@ -52,6 +52,8 @@ Potential solutions:
 - use less load
 - fine tuning (Application, GC, DB)
 
+
+
 ## Load testing
 
 Answers:
@@ -59,9 +61,18 @@ Answers:
 1. Load
 
 2. Profile and requests:
-	- we should add to profile all requests from SLA, because wee ned them to measure success of our tests
-	- we can ignore requests for resources (scripts, images etc.) as they are static reources and requests for them not generating a load on API and DB
+	- we should include to profile all requests from SLA, because wee need them to measure success of our tests; they, obviously,  are also requests which generate main load by the users accordigly to the task.
 
 	- we could include also:
 		- `/values` - as it runs for every loaded issue
 		- `/search/assist` - as requests previuous to search it self
+		- `/hub/api/rest/users/me` - it requests on every page loading (infor about current user)
+		- `/api/config` - return info about application settings
+		- `/draftComment` - as request previous to adding comment
+
+	- we can ignore requests for resources (scripts, images etc.) as they are static reources and requests for them not generating a load on API and DB
+
+	- we can definitly ignore requests:
+		- `/folders` - we dont expect any messages
+		- `/fields` - we need not to ask API about them, we know them directly; we also dont use any custom fields (?)
+		- `activities` - we dont expect any
