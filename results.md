@@ -63,6 +63,8 @@ Firtsly I've decided to test the system with more reources to check that adding 
 ![pic.6](https://github.com/user-attachments/assets/9709486c-185f-4e83-9e15-bd4df7e8c233)
 
 System is still crashing after reaching 20 rps but now do not utilize even 80% of CPU. That shows us that something else causes crashes.
+But the way how the CPU utilization increases (kind of exponential) indicates that problem with reindexing is present.
+One of the solutions could be turn off the indexing for the time of issue loading.
 
 ## Load testing
 
