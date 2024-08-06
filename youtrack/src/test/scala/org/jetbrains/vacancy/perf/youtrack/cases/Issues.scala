@@ -44,7 +44,7 @@ object Issues {
       .check(jsonPath("$[*].id").findAll saveAs "issueIds")
 
   val randomSearch: HttpRequestBuilder =
-    http("searchAll")
+    http("randomSearch")
       .get("/api/issues?query=#{searchQuery}")
       .queryParam("fields", "id")
       .headers(Map(("Authorization", "Bearer #{token}")))

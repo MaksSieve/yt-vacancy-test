@@ -57,14 +57,36 @@ A load profile for the first set of test is pretty simple and includes only one 
 
 A load profile for the second set is more complex and should include more user operations.
 
-Each concurrent user wil share the same behaviour:
+Each concurrent user wil share the same behaviour :
 
-1. make a portion of searches
-2. open some issues
-3. for each opened issue make one of mutations:
-   - comment
-   - add link
-   - changes fields
+1. make a search (1 time, all):
+   - `POST /search/assist`
+   - `POST /sortedIssues`
+   - `POST /issuesGetter`
+
+2. open issue (3 times, all)
+   - `GET /users/me/recent/issues`
+   - `GET /users/me`
+   - `GET /issues/${id}`
+
+3. for one of opened issues make one of mutations (1 time, random one):
+   - comment: `POST /issues/${id}/comment {text: "..."}`
+   - add link: `POST /command {query: "..."}`
+   - change desc: `POST /issue/${id} { description: "..." }`
+
+The final profile looks like this:
+
+| name | reuqest | rph | rps |
+| --- | --- | --- | --- |
+| searchAssist | POST /search/assist | 10 | 0.0028 |
+| sortedIssues | POST /sortedIssues | 10 | 0.0028 |
+| issuesGetter | POST /issuesGettert | 10 | 0.0028 |
+| recentIssues | GET /users/me/recent/issues | 30 | 0.0084 |
+| me | GET /users/me | 30 | 0.0084 |
+| openIssue | GET /issues/${id} | 30 | 0.0084 |
+| comment | POST /issues/${id}/comment | 10 | 0.0028 |
+| addLink | POST /command | 10 | 0.0028 |
+| changeDesc | POST /issue/${id} | 10 | 0.0028 |
 
 ### Testing data
 
