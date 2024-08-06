@@ -51,6 +51,13 @@ Potential solutions:
 - change tools to closed load model
 - use less load
 - fine tuning (Application, GC, DB)
+  
+### Third iteration
+
+Firtsly I've decided to test the system with more reources to check that adding more CPU could help the system to endure the load.
+Test showed that adding more CPU cores add some capacity to the system but this is not the key factor:
+![image](https://github.com/user-attachments/assets/1964d290-aad2-4e01-b523-8f9dbbeced1e)
+
 
 ## Load testing
 
