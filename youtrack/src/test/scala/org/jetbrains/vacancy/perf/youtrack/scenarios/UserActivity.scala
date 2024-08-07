@@ -43,30 +43,30 @@ class UserActivity(
 
   val scn: ScenarioBuilder = scenario("Add Issues Scenario")
     .forever("")(
-      pace(3600)
+      pace(900)
         .feed(userFeeder)
         .group("search")(
-          pace(60)
+          pace(100)
             .feed(searchQueryFeeder)
             .exec(Issues.searchAssist)
-            .pause(1,10)
+            .pause(20,30)
             .exec(Issues.sortedIssues)
-            .pause(1,10)
+            .pause(20,30)
             .exec(Issues.issuesGetter)
-            .pause(1,10)
+            .pause(20,30)
         )
         .repeat(3)(
           group("open")(
-            pace(60)
+            pace(90)
               .exec(chooseIssueId)
               .exec(Users.me)
-              .pause(1,10)
+              .pause(20,30)
               .exec(Issues.openIssue)
-              .pause(1,10)
+              .pause(20,30)
           )
         )
         .group("change")(
-          pace(60)
+          pace(120)
           .exec(chooseIssueId)
           .randomSwitch(
             25.0 -> exec(Issues.addComment),
@@ -75,10 +75,10 @@ class UserActivity(
               .exec(Issues.addTag),
             25.0 -> exec(Users.recentIssues)
               .exec(chooseIssueIdToLink)
-              .pause(1,10)
+              .pause(20, 30)
               .feed(commandsFeeder)
               .exec(Issues.addLink),
-          ).pause(1, 10)
+          )
         )
 
     )

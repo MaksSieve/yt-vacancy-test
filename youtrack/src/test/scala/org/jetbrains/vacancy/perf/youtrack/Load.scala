@@ -9,8 +9,8 @@ class Load extends Simulation with Annotations {
 
   setUp(
     UserActivity().inject(
-      rampUsersPerSec(0) to intensity.toInt during rampDuration,
-      constantUsersPerSec(intensity.toInt) during stageDuration,
+      rampConcurrentUsers(0) to intensity.toInt during rampDuration,
+      constantConcurrentUsers(intensity.toInt) during stageDuration,
     )
   )
     .protocols(httpProtocol)

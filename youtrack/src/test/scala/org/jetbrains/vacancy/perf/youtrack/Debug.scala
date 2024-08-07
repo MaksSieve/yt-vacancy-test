@@ -1,7 +1,6 @@
 package org.jetbrains.vacancy.perf.youtrack
 
 import io.gatling.core.Predef._
-import io.gatling.core.feeder.BatchableFeederBuilder
 import io.gatling.http.Predef._
 import org.galaxio.gatling.config.SimulationConfig._
 import org.jetbrains.vacancy.perf.youtrack.scenarios._
