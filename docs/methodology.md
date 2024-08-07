@@ -84,10 +84,11 @@ The final profile for 100 users looks like this:
 | recentIssues | GET /users/me/recent/issues | 3000 | 0.84 |
 | me | GET /users/me | 3000 | 0.84 |
 | openIssue | GET /issues/${id} | 3000 | 0.84 |
-| comment | POST /issues/${id}/comment | 1000 | 0.28 |
-| addLink | POST /command | 1000 | 0.28 |
-| changeDesc | POST /issue/${id} | 1000 | 0.28 |
-|| **Total:** | **15000** | **4.2** |
+| comment | POST /issues/${id}/comment | 250 | 0.07 |
+| addLink | POST /command | 250 | 0.07 |
+| changeDesc | POST /issue/${id} | 250 | 0.07 |
+| addTag | POST /issue/${id} | 250 | 0.07 |
+|| **Total:** | **14000** | **3.89** |
 
 ### Testing data
 

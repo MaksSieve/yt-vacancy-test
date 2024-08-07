@@ -39,40 +39,42 @@ object Issues {
   val issuesGetter: ChainBuilder =
     exec(
       session => {
-        val ids = session("issueIds").as[List[String]]
-        session.set("issuesGetterBody", "[" + ids.map(id => s"""{"id": ${id}},""").mkString("") + "]")
+        val ids = session("issueIds").as[Vector[String]]
+        val issuesGetterBody = "[" + ids.map(id => s"""{"id": "$id"}""").mkString(",") + "]"
+        session.set("issuesGetterBody", issuesGetterBody)
       }
     ).exec(http("issuesGetter")
-      .get("/api/issuesGetter")
-      .queryParam("fields", "$type,attachments(id),canAddPublicComment,canUpdateVisibility,commentsCount,fields($type,hasStateMachine,id,isUpdatable,name,projectCustomField($type,bundle(id),canBeEmpty,emptyFieldText,field(fieldType(isMultiValue,valueType),id,localizedName,name,ordinal),id,isEstimation,isPublic,isSpentTime,ordinal,size),value($type,archived,avatarUrl,buildIntegration,buildLink,color(background,foreground,id),description,fullName,id,isResolved,localizedName,login,markdownText,minutes,name,presentation,ringId,text)),hasEmail,id,idReadable,project($type,id,isDemo,leader(id),name,plugins(helpDeskSettings(enabled)),ringId,shortName),reporter($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id)),resolved,summary,tags(color(id),id,isUpdatable,isUsable,name,owner(id),query),transaction(authorId,timestamp),updated,updater($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id)),visibility($type,implicitPermittedUsers($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id)),permittedGroups($type,allUsersGroup,icon,id,name,ringId),permittedUsers($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id))),voters(hasVote),votes,watchers(hasStar)")
+      .post("/api/issuesGetter")
+      .queryParam("fields", "id,idReadable,$type,attachments(id),canAddPublicComment,canUpdateVisibility,commentsCount,fields($type,hasStateMachine,id,isUpdatable,name,projectCustomField($type,bundle(id),canBeEmpty,emptyFieldText,field(fieldType(isMultiValue,valueType),id,localizedName,name,ordinal),id,isEstimation,isPublic,isSpentTime,ordinal,size),value($type,archived,avatarUrl,buildIntegration,buildLink,color(background,foreground,id),description,fullName,id,isResolved,localizedName,login,markdownText,minutes,name,presentation,ringId,text)),hasEmail,id,idReadable,project($type,id,isDemo,leader(id),name,plugins(helpDeskSettings(enabled)),ringId,shortName),reporter($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id)),resolved,summary,tags(color(id),id,isUpdatable,isUsable,name,owner(id),query),transaction(authorId,timestamp),updated,updater($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id)),visibility($type,implicitPermittedUsers($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id)),permittedGroups($type,allUsersGroup,icon,id,name,ringId),permittedUsers($type,avatarUrl,banBadge,banned,canReadProfile,email,fullName,id,isEmailVerified,isLocked,issueRelatedGroup(icon),login,name,online,profiles(general(trackOnlineStatus)),ringId,userType(id))),voters(hasVote),votes,watchers(hasStar)")
       .header("Authorization", "Bearer #{token}")
-      .body(StringBody("#{issuesGetterBody}"))
+      .body(StringBody("#{issuesGetterBody}")).asJson
       .check(status is 200)
-      .check(jsonPath("$[*].id").findAll saveAs "issueIds"))
+      .check(jsonPath("$[*].id").findAll saveAs "issueIds")
+      .check(jsonPath("$[*].idReadable").findAll saveAs "issueReadableIds")
+    )
 
   val sortedIssues: HttpRequestBuilder =
     http("sortedIssues")
       .get("/api/sortedIssues?query=#{searchQuery}")
       .queryParam("query", "#{searchQuery}")
-      .queryParam("fields", "tree(id,matches,ordered,parentId,summaryTextSearchResult(highlightRanges(endOffset,startOffset),textRange(endOffset,startOffset)))")
+      .queryParam("fields", "tree(id,idReadable,matches,ordered,parentId,summaryTextSearchResult(highlightRanges(endOffset,startOffset),textRange(endOffset,startOffset)))")
       .queryParam("flatten", "true")
       .queryParam("skipRoot", 0)
       .queryParam("topRoot", 101)
       .queryParam("unresolvedOnly", false)
       .header("Authorization", "Bearer #{token}")
       .check(status is 200)
-      .check(jsonPath("$[*].id").findAll saveAs "issueIds")
-      .check(jsonPath("$[*].idReadable").findAll saveAs "issueReadableIds")
+      .check(jsonPath("$.tree[*].id").findAll saveAs "issueIds")
 
   val searchAssist: HttpRequestBuilder =
     http("searchAssist")
-      .get("/api/search/assist")
+      .post("/api/search/assist")
       .queryParam("fields", "caret,query,suggestions(caret,completionEnd,completionStart,description,group,matchingEnd,matchingStart,option)")
       .header("Authorization", "Bearer #{token}")
       .body(
         StringBody(
           """{
-            |"query": "#{searchQuery}",
+            |"query": "#{searchQuery}"
             |}""".stripMargin
         )
       ).asJson
@@ -82,16 +84,22 @@ object Issues {
     http("openIssue")
       .get("/api/issues/#{selectedIssueId}")
       .queryParam("fields", "id,summary,links,comments")
-      .headers(Map(("Authorization", "Bearer #{token}")))
+      .header("Authorization", "Bearer #{token}")
       .check(status is 200)
 
   val addLink: HttpRequestBuilder =
     http("addLink")
       .post("/api/commands")
-      .queryParam("fields", "")
       .header("Authorization", "Bearer #{token}")
       .body(
-        StringBody("""{"query": "related to: #{issueToLink}"}""")
+        StringBody("""{"issues": [{"id": "#{selectedIssueId}"}], "query": "#{linkCommand}: #{issueIdToLink}"}""")
       ).asJson
+      .check(status is 200)
+
+  val addTag: HttpRequestBuilder =
+    http("addTag")
+      .post("/api/issues/#{selectedIssueId}")
+      .header("Authorization", "Bearer #{token}")
+      .body(StringBody("""{"id": "#{tagId}"}""")).asJson
       .check(status is 200)
 }

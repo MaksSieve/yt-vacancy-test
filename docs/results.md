@@ -69,7 +69,10 @@ One of the solutions could be turn off the indexing for the time of issue loadin
 ### Fourth iteration
 
 We could also use standart YouTrack instruments to import issues.
-I wrote a simple csv [generator](/youtrack-issue-csv-generator/), and the load this csv to YouTrack via google sheet
+I wrote a simple csv [generator](/youtrack-issue-csv-generator/), and the load this csv to YouTrack via google sheetю
+
+This approach allowed to import all 100k issues with a time ~6.5-7 hours.
+A mean rate is ~4-4.3 rps.
 
 ## Load testing
 
