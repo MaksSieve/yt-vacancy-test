@@ -10,7 +10,7 @@
 ## Short results
 
 - 100k issues could be loaded with aproximate 7 hours (with standart import tool).
-- System should endure 100 user with a database that has 100k issue.
+- System should endure 100 users with a database that has 100k issue.
 
 ## Issues loading
 
@@ -88,10 +88,12 @@ A mean rate is ~4-4.3 rps.
 	- 1 hour stable load
 
 	[The results](/youtrack/runsresults/load-20240807115446981/) of this iteration showed that something wrong in scenario design: generator did not reeach the target load (~ 4rps). The shape of load also was not perfect:
+	![image](https://github.com/user-attachments/assets/b1fd69b6-c796-4305-8a7e-a05bfe889ed8)
+
 
 	
 
-2. Profile and requests:
+3. Profile and requests:
 	- we should include to profile all requests from SLA, because wee need them to measure success of our tests; they, obviously,  are also requests which generate main load by the users accordigly to the task.
 
 	- we could include also:
